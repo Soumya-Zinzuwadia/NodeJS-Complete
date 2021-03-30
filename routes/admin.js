@@ -6,17 +6,22 @@ const path = require('path');
 
 const rootDir = require('../util/path');
 
+const products = [];
 
 router.post('/product', (req, res) => {
-    console.log(JSON.stringify(req.body));
+    products.push({
+        title: req.body.title
+    });
+    // console.log(JSON.stringify(req.body));
     res.redirect('/');
 });
 
 router.get('/add-product', (req, res, next) => {
-    res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
+    // res.sendFile(path.join(rootDir, 'views', 'add-product.html'));   
+    res.render('add-product');
 
-    // res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>');
 });
 
 
-module.exports = router;
+exports.routes = router;
+exports.products = products;
